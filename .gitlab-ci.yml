@@ -1,0 +1,14 @@
+image: docker:stable
+
+variable:
+    IMAGE_NAME: "alpine_python:1.1.0"
+
+services:
+    - docker:19.03.12-dind
+
+
+build image:
+    script:
+        - docker build -t $CI_REGISTRY/t1788/demos/dockerimage_create/$IMAGE_NAME .
+        - docker login $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+        - docker push $CI_REGISTRY/t1788/demos/dockerimage_create/$IMAGE_NAME
